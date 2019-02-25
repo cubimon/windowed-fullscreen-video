@@ -1,0 +1,6 @@
+icons/iconNew.png filter=lfs diff=lfs merge=lfs -text
+icons/iconOld.png filter=lfs diff=lfs merge=lfs -text
+icons/icon.png filter=lfs diff=lfs merge=lfs -text
+icons/expand-solid.svg filter=lfs diff=lfs merge=lfs -text
+icons/expand-solid.xcf filter=lfs diff=lfs merge=lfs -text
+icons/iconOld.xcf filter=lfs diff=lfs merge=lfs -text

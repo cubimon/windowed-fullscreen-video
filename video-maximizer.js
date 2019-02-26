@@ -3,14 +3,18 @@
 
   function fullscreen_elem(elem) {
     var bb = elem.getBoundingClientRect();
-    elem.style.width = `${document.documentElement.clientWidth}px`;
-    elem.style.height = `${document.documentElement.clientHeight}px`;
-    elem.style.top = `-${bb.y}px`;
-    elem.style.left =`-${bb.x}px`;
+    elem.style.width = "100%";
+    elem.style.height = "100%";
+    elem.style.top = "0px";
+    elem.style.left = "0px";
   }
 
   function fullscreen_video() {
     var video = document.querySelector("video");
+    if (video == undefined) {
+      alert("video not found");
+      return;
+    }
     if (div != undefined) {
       return;
     }

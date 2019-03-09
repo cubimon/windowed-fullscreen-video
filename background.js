@@ -7,5 +7,11 @@ function makeCurrentTabVideoWindowedFullscreen() {
   });
 }
 
+browser.commands.onCommand.addListener(function(command) {
+  if (command == "windowed-fullscreen") {
+    makeCurrentTabVideoWindowedFullscreen();
+  }
+});
+
 browser.browserAction.onClicked.addListener(makeCurrentTabVideoWindowedFullscreen);
 

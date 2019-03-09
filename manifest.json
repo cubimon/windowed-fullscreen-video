@@ -2,7 +2,7 @@
   "description": "make video fullscreen in window",
   "manifest_version": 2,
   "name": "windowed-fullscreen-video",
-  "version": "1.1",
+  "version": "1.2",
   "icons": {
     "128": "icons/icon.png"
   },
@@ -15,5 +15,13 @@
   },
   "background": {
     "scripts": ["background.js"]
+  },
+  "commands": {
+    "windowed-fullscreen": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "description": "Make video on current site fullscreen"
+    }
   }
 }

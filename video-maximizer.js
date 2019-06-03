@@ -40,7 +40,7 @@ if (!window.isInitialized) {
 
     // move video to old position in dom
     window.video.style.cssText = window.videoOldStyle
-    window.videoOldParent.children.appendChild(window.video)
+    window.videoOldParent.appendChild(window.video)
     window.video = undefined
     window.videoOldParent = undefined
     window.videoOldStyle = undefined

@@ -1,7 +1,7 @@
 /*
- * Find video in current tab and make it fullscreen
+ * Find video in current tab and toggle fullscreen
  */
-function makeCurrentTabVideoWindowedFullscreen() {
+function toggleWindowedFullscreen() {
   browser.tabs.executeScript({
     file: "/video-maximizer.js"
   });
@@ -12,9 +12,8 @@ function makeCurrentTabVideoWindowedFullscreen() {
 
 browser.commands.onCommand.addListener(function(command) {
   if (command == "windowed-fullscreen") {
-    makeCurrentTabVideoWindowedFullscreen()
+    toggleWindowedFullscreen()
   }
 });
 
-browser.browserAction.onClicked.addListener(makeCurrentTabVideoWindowedFullscreen)
-
+browser.browserAction.onClicked.addListener(toggleWindowedFullscreen)

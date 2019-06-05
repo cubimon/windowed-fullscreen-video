@@ -1,13 +1,28 @@
 if (!window.isInitialized) {
   console.log("initializing")
   window.isInitialized = true
+  // Current state/if windowed fullscreen or not
   window.isFullscreen = false
+  // We hide all top nodes by setting css style to "display:none"
+  // So we remember the old css display attribute to undo fullscreen later
   window.oldDisplayPerNodeId = {}
+  // We overwrite all style changes to video in windowed fullscreen mode, to enforce our style.
+  // So we want to save the old style, but we don't want to see our own style changes
+  window.videoIgnoreNextStyleChange = false
+  // Video element to make fullscreen/show browser's default control elements
   window.video = undefined
+  // Extra top level div, where video is stored in windowed fullscreen mode
+  // Only that is not hidden in windowed fullscreen mode
   window.videoDiv = undefined
+  // Observer to listen for controls/style attribute changes
+  // to force/override/remember these attributes
   window.videoObserver = undefined
-  window.videoOldStyle = undefined
+  // Old parent in dom before moving video element to video div
   window.videoOldParent = undefined
+  // Old style attribute of video before windowed fullscreen mode
+  window.videoOldStyle = undefined
+  // Old controls attribute of video before windowed fullscreen mode
+  window.videoOldControls = undefined
 
   nodeNamesToSkip = ["script", "style"].map((str) => str.toUpperCase())
 
@@ -40,10 +55,12 @@ if (!window.isInitialized) {
 
     // move video to old position in dom
     window.video.style.cssText = window.videoOldStyle
+    window.video.controls = window.videoOldControls
     window.videoOldParent.appendChild(window.video)
     window.video = undefined
     window.videoOldParent = undefined
     window.videoOldStyle = undefined
+    window.videoOldControls = undefined
 
     // remove video div
     document.body.removeChild(window.videoDiv)
@@ -94,10 +111,24 @@ if (!window.isInitialized) {
       if (!window.video.controls) {
         window.video.controls = true
       }
+      for (mutation of mutations) {
+        if (mutation.type == "attributes" && mutation.attributeName == "style") {
+          if (window.videoIgnoreNextStyleChange) {
+            window.videoIgnoreNextStyleChange = false
+            return
+          } else {
+            window.videoOldStyle = window.video.style.cssText
+            window.videoIgnoreNextStyleChange = true
+            fullscreen_elem(window.video)
+            return
+          }
+        }
+      }
     })
     window.videoObserver.observe(window.video, {
       attributes: true
     })
+    window.videoOldControls = window.video.controls
     window.video.controls = true
   }
 

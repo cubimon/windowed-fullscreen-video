@@ -5,6 +5,7 @@ function toggleWindowedFullscreen() {
   browser.tabs.executeScript({
     file: "/video-maximizer.js"
   });
+  // TODO: this doesn't work/concurrency or something like that
   browser.tabs.executeScript({
     code: "toggle_fullscreen()"
   });

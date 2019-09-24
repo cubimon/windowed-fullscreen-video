@@ -4,17 +4,20 @@
 function toggleWindowedFullscreen() {
   browser.tabs.executeScript({
     file: "/video-maximizer.js"
-  });
-  // TODO: this doesn't work/concurrency or something like that
-  browser.tabs.executeScript({
-    code: "toggle_fullscreen()"
-  });
+  }).then(() => {
+    // on success toggle fullscreen
+    browser.tabs.executeScript({
+      code: "toggle_fullscreen()"
+    })
+  }, (error) => {
+    console.log(`error: ${error}`)
+  })
 }
 
 browser.commands.onCommand.addListener(function(command) {
   if (command == "windowed-fullscreen") {
     toggleWindowedFullscreen()
   }
-});
+})
 
 browser.browserAction.onClicked.addListener(toggleWindowedFullscreen)

@@ -24,7 +24,7 @@ if (!window.isInitialized) {
   // Old controls attribute of video before windowed fullscreen mode
   window.videoOldControls = undefined
 
-  nodeNamesToSkip = ["script", "style"].map((str) => str.toUpperCase())
+  nodeNamesToSkip = ["script", "style"].map(str => str.toUpperCase())
 
   function fullscreen_elem(elem) {
     var bb = elem.getBoundingClientRect()
@@ -41,7 +41,7 @@ if (!window.isInitialized) {
 
     // display everything again
     for (var nodeId in window.oldDisplayPerNodeId) {
-      var node = document.getElementById(nodeId);
+      var node = document.getElementById(nodeId)
       if (node == undefined)
         continue
       var oldDisplay = window.oldDisplayPerNodeId[nodeId]

@@ -23,6 +23,8 @@ if (!window.isInitialized) {
   window.videoOldStyle = undefined
   // Old controls attribute of video before windowed fullscreen mode
   window.videoOldControls = undefined
+  // Old style attribute of body before windowed fullscreen mode
+  window.bodyOldStyle = undefined
 
   nodeNamesToSkip = ["script", "style"].map(str => str.toUpperCase())
 
@@ -63,6 +65,7 @@ if (!window.isInitialized) {
     window.videoOldControls = undefined
 
     // remove video div
+    document.body.style.cssText = window.bodyOldStyle
     document.body.removeChild(window.videoDiv)
     window.videoDiv = undefined
 
@@ -84,6 +87,10 @@ if (!window.isInitialized) {
     }
     window.videoOldParent = window.video.parentElement
     window.videoOldStyle = window.video.style.cssText
+    window.video.style.backgroundColor = "black";
+
+    window.bodyOldStyle = document.body.style.cssText
+    document.body.style.overflow = "hidden"
 
     // hide everything except video div
     var index = 0
